@@ -25,4 +25,27 @@ class GameScene: SKScene {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    var lastUpdateTime: TimeInterval? = nil
+    override func update(_ currentTime: TimeInterval) {
+        
+        if let lastUpdateTime {
+            
+            let deltaTime = currentTime - lastUpdateTime
+            
+            for entity in entities {
+                
+                entity.update(deltaTime: deltaTime)
+                
+            }
+            
+            self.lastUpdateTime = currentTime
+            
+        }else {
+            
+            self.lastUpdateTime = currentTime
+            
+        }
+        
+    }
 }
