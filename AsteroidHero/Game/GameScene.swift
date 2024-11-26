@@ -18,8 +18,8 @@ class GameScene: SKScene {
         self.scaleMode = .aspectFit
         self.anchorPoint = .zero
         
-        entities.append(EarthEntity(scene: self))
-        entities.append(HeroEntity(scene: self))
+        _ = EarthEntity(scene: self)
+        _ = HeroEntity(scene: self)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -47,5 +47,13 @@ class GameScene: SKScene {
             
         }
         
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for component in (entities.flatMap { $0.components }) {
+            if let userInteractivableComponent = component as? (UserInteractivableComponent & GKComponent) {
+                userInteractivableComponent.onTouchesBegan(touches, with: event)
+            }
+        }
     }
 }

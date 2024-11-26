@@ -12,7 +12,7 @@ import SpriteKit
 class ShapeComponent: GKComponent {
     let shape: SKShapeNode
     
-    init(shape: SKShapeNode, scene: SKScene) {
+    init(shape: SKShapeNode, scene: GameScene) {
         self.shape = shape
         super.init()
         
