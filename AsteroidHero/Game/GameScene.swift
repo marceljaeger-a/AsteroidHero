@@ -11,9 +11,11 @@ import GameplayKit
 
 class GameScene: SKScene {
     
+    let stats: GameStats
     var entities: Array<GKEntity> = []
     
-    override init() {
+    init(stats: GameStats) {
+        self.stats = stats
         super.init(size: .init(width: 256, height: 128))
         self.scaleMode = .aspectFit
         self.anchorPoint = .zero
@@ -48,12 +50,27 @@ class GameScene: SKScene {
             
         }
         
+        updateGameStats()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for component in (entities.flatMap { $0.components }) {
             if let userInteractivableComponent = component as? (UserInteractivableComponent & GKComponent) {
                 userInteractivableComponent.onTouchesBegan(touches, with: event)
+            }
+        }
+    }
+    
+    private func updateGameStats() {
+        if let earthEntity = entities.first(where: { $0 is EarthEntity }) {
+            if let healthComponent = earthEntity.component(ofType: HealthComponent.self) {
+                if stats.earthHealthPoints != healthComponent.healthPoints {
+                    stats.earthHealthPoints = healthComponent.healthPoints
+                    if stats.earthHealthPoints <= 0 {
+                        stats.lost = true
+                        stats.endDate = .now
+                    }
+                }
             }
         }
     }
