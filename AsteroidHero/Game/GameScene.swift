@@ -20,6 +20,7 @@ class GameScene: SKScene {
         
         _ = EarthEntity(scene: self)
         _ = HeroEntity(scene: self)
+        _ = SpawnerEntity(scene: self)
     }
     
     required init?(coder aDecoder: NSCoder) {
