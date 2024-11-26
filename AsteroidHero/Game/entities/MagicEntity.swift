@@ -20,6 +20,8 @@ class MagicEntity: GKEntity {
         self.addComponent(ShapeComponent(shape: shape, scene: scene))
         self.addComponent(FlyingComponent(movementVector: movementVector, scene: scene))
         
+        self.addComponent(AttackComponent(attackDamage: 1, attackMask: .asteorid, scene: scene))
+        
         scene.entities.append(self)
     }
     

@@ -41,6 +41,6 @@ class AsteroidSpawningComponent: GKComponent {
     }
     
     func spawnAsteroid(point: CGPoint, movementVector: CGVector) {
-        _ = AsteoridEntity(position: point, movementVector: movementVector, scene: scene)
+        _ = AsteoridEntity(position: point, movementVector: movementVector, healthPoints: 1, attackDamage: 1, scene: scene)
     }
 }

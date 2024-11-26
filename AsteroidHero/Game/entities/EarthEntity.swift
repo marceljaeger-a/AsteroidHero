@@ -18,6 +18,7 @@ class EarthEntity: GKEntity {
         shape.fillColor = .green
         shape.position = .init(x: 128, y: 8)
         self.addComponent(ShapeComponent(shape: shape, scene: scene))
+        self.addComponent(HealthComponent(healthPoints: 3, attackMask: .earth, isDespawning: false, scene: scene))
         
         scene.entities.append(self)
     }

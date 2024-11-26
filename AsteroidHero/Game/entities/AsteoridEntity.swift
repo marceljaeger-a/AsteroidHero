@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 
 class AsteoridEntity: GKEntity {
-    init(position: CGPoint, movementVector: CGVector, scene: GameScene) {
+    init(position: CGPoint, movementVector: CGVector, healthPoints: Int, attackDamage: Int, scene: GameScene) {
         super.init()
         
         scene.entities.append(self)
@@ -21,6 +21,9 @@ class AsteoridEntity: GKEntity {
         shape.position = position
         self.addComponent(ShapeComponent(shape: shape, scene: scene))
         self.addComponent(FlyingComponent(movementVector: movementVector, scene: scene))
+        
+        self.addComponent(HealthComponent(healthPoints: healthPoints, attackMask: .asteorid, isDespawning: true, scene: scene))
+        self.addComponent(AttackComponent(attackDamage: attackDamage, attackMask: .earth, scene: scene))
     }
     
     required init?(coder: NSCoder) {
