@@ -12,6 +12,8 @@ import SpriteKit
 class AsteroidSpawningComponent: GKComponent {
     let scene: GameScene
     var spawingRate: TimeInterval = 5
+    var spawningCount: Int = 1
+    var asteoridSpeed: CGFloat = 20
     private var secondsBuffer: TimeInterval = 0
     
     init(scene: GameScene) {
@@ -25,22 +27,26 @@ class AsteroidSpawningComponent: GKComponent {
     
     override func update(deltaTime seconds: TimeInterval) {
         secondsBuffer += seconds
-        
-        let y = scene.frame.maxY + 25
-        let xRange = Int(scene.frame.minX)+50...Int(scene.frame.maxX)-50
-        let x = CGFloat(xRange.randomElement() ?? xRange.lowerBound)
-        let startPoint = CGPoint(x: x, y: y)
-        let movementVector = CGVector(dx: 0, dy: -20)
-        
+    
         if secondsBuffer > spawingRate {
-
-            spawnAsteroid(point: startPoint, movementVector: movementVector)
-            secondsBuffer = 0
             
+            //Spawn
+            for i in 0..<spawningCount {
+                spawnAsteroid()
+            }
+            
+            secondsBuffer = 0
         }
     }
     
-    func spawnAsteroid(point: CGPoint, movementVector: CGVector) {
-        _ = AsteoridEntity(position: point, movementVector: movementVector, healthPoints: 1, attackDamage: 1, scene: scene)
+    func spawnAsteroid() {
+        let y = scene.frame.maxY + 10
+        let xRange = Int(scene.frame.minX)+10...Int(scene.frame.maxX)-10
+        
+        let x = CGFloat(xRange.randomElement() ?? xRange.lowerBound)
+        let startPoint = CGPoint(x: x, y: y)
+        let movementVector = CGVector(dx: 0, dy: -1 * asteoridSpeed)
+        
+        _ = AsteoridEntity(position: startPoint, movementVector: movementVector, healthPoints: 1, attackDamage: 1, scene: scene)
     }
 }

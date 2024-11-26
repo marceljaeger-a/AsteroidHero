@@ -51,6 +51,7 @@ class GameScene: SKScene {
         }
         
         updateGameStats()
+        updateSpawnerEntity(currentTime: currentTime)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -72,6 +73,28 @@ class GameScene: SKScene {
                     }
                 }
             }
+        }
+    }
+    
+    var lastSpawnerUpdateTime: TimeInterval = 0
+    private func updateSpawnerEntity(currentTime: TimeInterval) {
+        if let spawnerEntitiy = entities.first(where: { $0 is SpawnerEntity }), let statsStartDate = stats.startDate {
+          
+            if let asteoridSpawningComponent = spawnerEntitiy.component(ofType: AsteroidSpawningComponent.self) {
+                
+                //Check update time
+                if currentTime - lastSpawnerUpdateTime >= 10 {
+                    
+                    //Update spawning variables
+                    asteoridSpawningComponent.spawingRate -= 0.25
+                    asteoridSpawningComponent.asteoridSpeed += 0.25
+                    asteoridSpawningComponent.spawningCount += 1
+                    
+                    lastSpawnerUpdateTime = currentTime
+                }
+                
+            }
+            
         }
     }
 }
