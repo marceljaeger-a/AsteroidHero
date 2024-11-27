@@ -76,6 +76,9 @@ class GameScene: SKScene {
         }
     }
     
+    //TODO: Überschreibe es als Gamelevelupdate
+    //Alle 10 Sekunden, als Beispiel, wird das Gamelevel erhöht. Jedes Gamelevel besitzt Paramater, wie einzelne Parameter des Spiels verändert werden.
+    //Es wird entweder multipliziert (increaseByFactor), erhöht (increaseByValue) oder explizit gesetzt (set).
     var lastSpawnerUpdateTime: TimeInterval = 0
     private func updateSpawnerEntity(currentTime: TimeInterval) {
         if let spawnerEntitiy = entities.first(where: { $0 is SpawnerEntity }), let statsStartDate = stats.startDate {
