@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 
 class MagicEntity: GKEntity {
-    init(startPosition: CGPoint, movementVector: CGVector, scene: GameScene) {
+    init(startPosition: CGPoint, movementVector: CGVector, attackDamage: Int, scene: GameScene) {
         super.init()
         
         let shape = SKShapeNode(ellipseOf: .init(width: 16, height: 16))
@@ -20,7 +20,7 @@ class MagicEntity: GKEntity {
         self.addComponent(ShapeComponent(shape: shape, scene: scene))
         self.addComponent(FlyingComponent(movementVector: movementVector, scene: scene))
         
-        self.addComponent(AttackComponent(attackDamage: 1, attackMask: .asteorid, scene: scene))
+        self.addComponent(AttackComponent(attackDamage: attackDamage, attackMask: .asteorid, scene: scene))
         
         scene.entities.append(self)
     }

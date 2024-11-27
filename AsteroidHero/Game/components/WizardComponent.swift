@@ -10,6 +10,10 @@ import GameplayKit
 import SpriteKit
 
 class WizardComponent: GKComponent, UserInteractivableComponent {
+    
+    var magicAttackDamage: Int = 1
+    var magicSpeed: CGFloat = 50
+    
     var node: SKNode? {
         self.entity?.component(ofType: ShapeComponent.self)?.shape
     }
@@ -22,9 +26,6 @@ class WizardComponent: GKComponent, UserInteractivableComponent {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func update(deltaTime seconds: TimeInterval) {
-        
-    }
     
     func onTouchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let node, let scene = node.scene as? GameScene {
@@ -44,10 +45,7 @@ class WizardComponent: GKComponent, UserInteractivableComponent {
                 let movementVectorY = distanceVector.dy / distance
                 let movementVector = CGVector(dx: movementVectorX, dy: movementVectorY)
                 
-                //Speed
-                let speed: CGFloat = 50
-                
-                createMagic(startPosition: node.position, movementVector: CGVector(dx: movementVector.dx * speed, dy: movementVector.dy * speed), scene: scene)
+                createMagic(startPosition: node.position, movementVector: CGVector(dx: movementVector.dx * magicSpeed, dy: movementVector.dy * magicSpeed), scene: scene)
                 
             }
             
@@ -55,6 +53,6 @@ class WizardComponent: GKComponent, UserInteractivableComponent {
     }
     
     func createMagic(startPosition: CGPoint, movementVector: CGVector, scene: GameScene) {
-        _ = MagicEntity(startPosition: startPosition, movementVector: movementVector, scene: scene)
+        _ = MagicEntity(startPosition: startPosition, movementVector: movementVector, attackDamage: magicAttackDamage, scene: scene)
     }
 }
