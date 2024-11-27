@@ -13,6 +13,7 @@ class WizardComponent: GKComponent, UserInteractivableComponent {
     
     var magicAttackDamage: Int = 1
     var magicSpeed: CGFloat = 50
+    var magicAttackCount: Int = 2
     
     var node: SKNode? {
         self.entity?.component(ofType: ShapeComponent.self)?.shape
@@ -53,6 +54,6 @@ class WizardComponent: GKComponent, UserInteractivableComponent {
     }
     
     func createMagic(startPosition: CGPoint, movementVector: CGVector, scene: GameScene) {
-        _ = MagicEntity(startPosition: startPosition, movementVector: movementVector, attackDamage: magicAttackDamage, scene: scene)
+        _ = MagicEntity(startPosition: startPosition, movementVector: movementVector, attackDamage: magicAttackDamage, attackCount: magicAttackCount, scene: scene)
     }
 }

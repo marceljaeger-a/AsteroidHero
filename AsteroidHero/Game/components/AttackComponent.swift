@@ -15,14 +15,16 @@ class AttackComponent: GKComponent {
     
     var attackDamage: Int
     var attackMask: AttackMask
+    var attackCount: Int
     
     var node: SKNode? {
         self.entity?.component(ofType: ShapeComponent.self)?.shape
     }
     
-    init(attackDamage: Int, attackMask: AttackMask, scene: GameScene) {
+    init(attackDamage: Int, attackMask: AttackMask, attackCount: Int, scene: GameScene) {
         self.attackDamage = attackDamage
         self.attackMask = attackMask
+        self.attackCount = attackCount
         self.scene = scene
         
         super.init()
@@ -42,11 +44,8 @@ class AttackComponent: GKComponent {
                     
                     if shapeComponent.shape.intersects(node) {
                         
-                        //Attack
                         attack(healthComponent: healthComponent)
-  
-                        scene.entities.removeAll { $0 == self.entity }
-                        node.removeFromParent()
+ 
                     }
                     
                 }
@@ -56,8 +55,12 @@ class AttackComponent: GKComponent {
     
     func attack(healthComponent: HealthComponent) {
         healthComponent.healthPoints -= attackDamage
+        attackCount -= 1
         
-        print("Attack!")
+        if attackCount <= 0 {
+            scene.entities.removeAll { $0 == self.entity }
+            self.node?.removeFromParent()
+        }
     }
 }
 
