@@ -50,6 +50,7 @@ class GameScene: SKScene {
             
         }
         
+        cleanUpMagicEntities()
         updateGameStats()
         updateSpawnerEntity(currentTime: currentTime)
     }
@@ -58,6 +59,17 @@ class GameScene: SKScene {
         for component in (entities.flatMap { $0.components }) {
             if let userInteractivableComponent = component as? (UserInteractivableComponent & GKComponent) {
                 userInteractivableComponent.onTouchesBegan(touches, with: event)
+            }
+        }
+    }
+    
+    private func cleanUpMagicEntities() {
+        for magicEntity in (entities.compactMap { $0 as? MagicEntity }) {
+            if let magicNode = magicEntity.component(ofType: ShapeComponent.self)?.shape {
+                if magicNode.frame.intersects(self.frame) == false {
+                    magicNode.removeFromParent()
+                    self.entities.removeAll { $0 == magicEntity}
+                }
             }
         }
     }
