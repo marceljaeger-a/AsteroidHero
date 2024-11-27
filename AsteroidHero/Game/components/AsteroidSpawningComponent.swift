@@ -60,9 +60,9 @@ class AsteroidSpawningComponent: GKComponent {
                 xSet.subtract(xRemovingRange)
                 
                 let startPoint = CGPoint(x: x, y: y)
-                let movementVector = CGVector(dx: 0, dy: -1 * asteoridSpeed)
+                let movementVector = CGVector(dx: 0, dy: -1)
                 
-                _ = AsteoridEntity(position: startPoint, movementVector: movementVector, healthPoints: 1, attackDamage: 1, scene: scene)
+                _ = AsteoridEntity(position: startPoint, movementVector: movementVector, movementSpeedFactor: asteoridSpeed, healthPoints: 1, attackDamage: 1, scene: scene)
                 
             }
             

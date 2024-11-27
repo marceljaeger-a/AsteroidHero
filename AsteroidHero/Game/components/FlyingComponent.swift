@@ -10,14 +10,16 @@ import GameplayKit
 import SpriteKit
 
 class FlyingComponent: GKComponent {
-    let movementVector: CGVector
+    var movementVector: CGVector
+    var movementSpeedFactor: CGFloat
     
     var node: SKNode? {
         self.entity?.component(ofType: ShapeComponent.self)?.shape
     }
     
-    init(movementVector: CGVector, scene: GameScene) {
+    init(movementVector: CGVector, movementSpeedFactor: CGFloat, scene: GameScene) {
         self.movementVector = movementVector
+        self.movementSpeedFactor = movementSpeedFactor
         super.init()
     }
     
@@ -27,8 +29,8 @@ class FlyingComponent: GKComponent {
     
     override func update(deltaTime seconds: TimeInterval) {
         if let node {
-            node.position.x += movementVector.dx * CGFloat(seconds)
-            node.position.y += movementVector.dy * CGFloat(seconds)
+            node.position.x += movementVector.dx * movementSpeedFactor * CGFloat(seconds)
+            node.position.y += movementVector.dy * movementSpeedFactor * CGFloat(seconds)
         }
     }
 }
