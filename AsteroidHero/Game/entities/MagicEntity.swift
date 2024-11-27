@@ -13,7 +13,7 @@ class MagicEntity: GKEntity {
     init(startPosition: CGPoint, movementVector: CGVector, movementSpeedFactor: CGFloat, attackDamage: Int, attackCount: Int, scene: GameScene) {
         super.init()
         
-        let shape = SKShapeNode(ellipseOf: .init(width: 16, height: 16))
+        let shape = SKShapeNode(ellipseOf: .init(width: 8, height: 8))
         shape.lineWidth = 0
         shape.fillColor = .orange
         shape.position = startPosition
