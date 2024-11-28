@@ -20,9 +20,15 @@ struct GamePhases {
     }
     
     var next: GamePhase? {
-        if let current, let currentLevelIndex = (phases.firstIndex { $0 == current }), currentLevelIndex < phases.count-1 {
+        if let current, let currentLevelIndex = (phases.firstIndex { $0 == current }) {
             
-            return phases[currentLevelIndex+1]
+            if currentLevelIndex < phases.count-1 {
+                
+                return phases[currentLevelIndex+1]
+                                
+            }
+            
+            return nil
             
         }else {
             
