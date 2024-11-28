@@ -14,18 +14,18 @@ class GameScene: SKScene {
     let stats: GameStats
     var entities: Array<GKEntity> = []
     
-    //GameLevels
-    var gameLevels: GameLevelStairs = .init(gameLevels: [
-        GameLevel(level: 1, time: 0, updates: [
+    //Game Phases
+    var gamePhases: GamePhases = .init(phases: [
+        GamePhase(name: "Phase 1", time: 0, updates: [
             AsteoridSpawningParameterUpdates(spawningRate: .set(value: 5), spawningCount: .set(value: 1), asteoridSpeed: .set(value: 20))
         ]),
-        GameLevel(level: 2, time: 15, updates: [
+        GamePhase(name: "Phase 2", time: 15, updates: [
             AsteoridSpawningParameterUpdates(spawningRate: .increase(value: -0.5), spawningCount: .increase(value: 1), asteoridSpeed: .multiple(value: 1.10))
         ]),
-        GameLevel(level: 3, time: 30, updates: [
+        GamePhase(name: "Phase 3", time: 30, updates: [
             AsteoridSpawningParameterUpdates(spawningRate: .increase(value: -0.5), spawningCount: .increase(value: 1), asteoridSpeed: .multiple(value: 1.10))
         ]),
-        GameLevel(level: 4, time: 45, updates: [
+        GamePhase(name: "Phase 4", time: 45, updates: [
             AsteoridSpawningParameterUpdates(spawningRate: .increase(value: -0.5), spawningCount: .increase(value: 1), asteoridSpeed: .multiple(value: 1.10))
         ])
     ])
@@ -77,7 +77,7 @@ class GameScene: SKScene {
         
         cleanUpMagicEntities()
         updateGameStats()
-        updateGameLevel(currentTime: currentTime)
+        updateGamePhase(currentTime: currentTime)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -113,15 +113,15 @@ class GameScene: SKScene {
         }
     }
     
-    private func updateGameLevel(currentTime: TimeInterval) {
+    private func updateGamePhase(currentTime: TimeInterval) {
         
         if let firstUpdateTime {
             
             let gameTime = currentTime - firstUpdateTime
             
-            if let nextLevel = gameLevels.nextLevel, nextLevel.time <= gameTime {
+            if let nextLevel = gamePhases.next, nextLevel.time <= gameTime {
                 
-                gameLevels.step(to: nextLevel, scene: self)
+                gamePhases.step(to: nextLevel, scene: self)
                 
             }
             

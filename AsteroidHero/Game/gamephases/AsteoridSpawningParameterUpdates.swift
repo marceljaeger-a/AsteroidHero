@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AsteoridSpawningParameterUpdates: GameLevelUpdate {
+struct AsteoridSpawningParameterUpdates: GamePhaseUpdate {
     let spawningRate: GameParameterUpdate<TimeInterval>
     let spawningCount: GameParameterUpdate<Int>
     let asteoridSpeed: GameParameterUpdate<CGFloat>
