@@ -14,8 +14,25 @@ class GameScene: SKScene {
     let stats: GameStats
     var entities: Array<GKEntity> = []
     
+    //GameLevels
+    var gameLevels: GameLevelStairs = .init(gameLevels: [
+        GameLevel(level: 1, time: 0, updates: [
+            AsteoridSpawningParameterUpdates(spawningRate: .set(value: 5), spawningCount: .set(value: 1), asteoridSpeed: .set(value: 20))
+        ]),
+        GameLevel(level: 2, time: 15, updates: [
+            AsteoridSpawningParameterUpdates(spawningRate: .increase(value: -0.5), spawningCount: .increase(value: 1), asteoridSpeed: .multiple(value: 1.10))
+        ]),
+        GameLevel(level: 3, time: 30, updates: [
+            AsteoridSpawningParameterUpdates(spawningRate: .increase(value: -0.5), spawningCount: .increase(value: 1), asteoridSpeed: .multiple(value: 1.10))
+        ]),
+        GameLevel(level: 4, time: 45, updates: [
+            AsteoridSpawningParameterUpdates(spawningRate: .increase(value: -0.5), spawningCount: .increase(value: 1), asteoridSpeed: .multiple(value: 1.10))
+        ])
+    ])
+    
     init(stats: GameStats) {
         self.stats = stats
+        
         super.init(size: .init(width: 256, height: 128))
         self.scaleMode = .aspectFit
         self.anchorPoint = .zero
@@ -29,8 +46,16 @@ class GameScene: SKScene {
         fatalError("init(coder:) has not been implemented")
     }
     
+    var currentTime: TimeInterval? = nil
+    var firstUpdateTime: TimeInterval? = nil
     var lastUpdateTime: TimeInterval? = nil
     override func update(_ currentTime: TimeInterval) {
+        
+        self.currentTime = currentTime
+        
+        if firstUpdateTime == nil {
+            firstUpdateTime = currentTime
+        }
         
         if let lastUpdateTime {
             
@@ -52,7 +77,7 @@ class GameScene: SKScene {
         
         cleanUpMagicEntities()
         updateGameStats()
-        updateSpawnerEntity(currentTime: currentTime)
+        updateGameLevel(currentTime: currentTime)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -88,28 +113,19 @@ class GameScene: SKScene {
         }
     }
     
-    //TODO: Überschreibe es als Gamelevelupdate
-    //Alle 10 Sekunden, als Beispiel, wird das Gamelevel erhöht. Jedes Gamelevel besitzt Paramater, wie einzelne Parameter des Spiels verändert werden.
-    //Es wird entweder multipliziert (increaseByFactor), erhöht (increaseByValue) oder explizit gesetzt (set).
-    var lastSpawnerUpdateTime: TimeInterval = 0
-    private func updateSpawnerEntity(currentTime: TimeInterval) {
-        if let spawnerEntitiy = entities.first(where: { $0 is SpawnerEntity }), let statsStartDate = stats.startDate {
-          
-            if let asteoridSpawningComponent = spawnerEntitiy.component(ofType: AsteroidSpawningComponent.self) {
+    private func updateGameLevel(currentTime: TimeInterval) {
+        
+        if let firstUpdateTime {
+            
+            let gameTime = currentTime - firstUpdateTime
+            
+            if let nextLevel = gameLevels.nextLevel, nextLevel.time <= gameTime {
                 
-                //Check update time
-                if currentTime - lastSpawnerUpdateTime >= 10 {
-                    
-                    //Update spawning variables
-                    asteoridSpawningComponent.spawingRate -= 0.25
-                    asteoridSpawningComponent.asteoridSpeed += 0.25
-                    asteoridSpawningComponent.spawningCount += 1
-                    
-                    lastSpawnerUpdateTime = currentTime
-                }
+                gameLevels.step(to: nextLevel, scene: self)
                 
             }
             
         }
+        
     }
 }

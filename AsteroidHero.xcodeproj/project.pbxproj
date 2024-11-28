@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		9FD0893E2CF7C4BC00AD336C /* BitCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 9FD0893D2CF7C4BC00AD336C /* BitCollections */; };
+		9FD089402CF7C4BC00AD336C /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 9FD0893F2CF7C4BC00AD336C /* Collections */; };
+		9FD089422CF7C4BC00AD336C /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 9FD089412CF7C4BC00AD336C /* DequeModule */; };
+		9FD089442CF7C4BC00AD336C /* HashTreeCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 9FD089432CF7C4BC00AD336C /* HashTreeCollections */; };
+		9FD089462CF7C4BC00AD336C /* HeapModule in Frameworks */ = {isa = PBXBuildFile; productRef = 9FD089452CF7C4BC00AD336C /* HeapModule */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		9F43F73B2CF4C48700286A9B /* AsteroidHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AsteroidHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +31,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FD089402CF7C4BC00AD336C /* Collections in Frameworks */,
+				9FD089462CF7C4BC00AD336C /* HeapModule in Frameworks */,
+				9FD0893E2CF7C4BC00AD336C /* BitCollections in Frameworks */,
+				9FD089442CF7C4BC00AD336C /* HashTreeCollections in Frameworks */,
+				9FD089422CF7C4BC00AD336C /* DequeModule in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +78,11 @@
 			);
 			name = AsteroidHero;
 			packageProductDependencies = (
+				9FD0893D2CF7C4BC00AD336C /* BitCollections */,
+				9FD0893F2CF7C4BC00AD336C /* Collections */,
+				9FD089412CF7C4BC00AD336C /* DequeModule */,
+				9FD089432CF7C4BC00AD336C /* HashTreeCollections */,
+				9FD089452CF7C4BC00AD336C /* HeapModule */,
 			);
 			productName = AsteroidHero;
 			productReference = 9F43F73B2CF4C48700286A9B /* AsteroidHero.app */;
@@ -94,6 +112,9 @@
 			);
 			mainGroup = 9F43F7322CF4C48700286A9B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				9FD0893C2CF7C4BC00AD336C /* XCRemoteSwiftPackageReference "swift-collections" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9F43F73C2CF4C48700286A9B /* Products */;
 			projectDirPath = "";
@@ -324,6 +345,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9FD0893C2CF7C4BC00AD336C /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9FD0893D2CF7C4BC00AD336C /* BitCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FD0893C2CF7C4BC00AD336C /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = BitCollections;
+		};
+		9FD0893F2CF7C4BC00AD336C /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FD0893C2CF7C4BC00AD336C /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		9FD089412CF7C4BC00AD336C /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FD0893C2CF7C4BC00AD336C /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+		9FD089432CF7C4BC00AD336C /* HashTreeCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FD0893C2CF7C4BC00AD336C /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = HashTreeCollections;
+		};
+		9FD089452CF7C4BC00AD336C /* HeapModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FD0893C2CF7C4BC00AD336C /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = HeapModule;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9F43F7332CF4C48700286A9B /* Project object */;
 }
