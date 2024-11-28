@@ -1,13 +1,14 @@
 //
-//  ContentView.swift
+//  GameView.swift
 //  AsteroidHero
 //
-//  Created by Marcel Jäger on 25.11.24.
+//  Created by Marcel Jäger on 28.11.24.
 //
 
+import Foundation
 import SwiftUI
 import SpriteKit
-import GameplayKit
+
 
 @Observable class GameStats {
     var lost: Bool = false
@@ -16,9 +17,9 @@ import GameplayKit
     var endDate: Date? = nil
 }
 
-struct ContentView: View {
+
+struct GameView: View {
     var body: some View {
-        
         if gameStats.lost == false {
             
             SpriteView(scene: GameScene(stats: gameStats))
@@ -30,28 +31,14 @@ struct ContentView: View {
             
         } else {
             
-            VStack {
-                
-                Text("You lost!")
-                    .font(.largeTitle)
-                    .bold()
-                
-                if let startDate = gameStats.startDate, let endDate = gameStats.endDate {
-                    Text("\(Duration.seconds(DateInterval(start: startDate, end: endDate).duration).formatted(Duration.TimeFormatStyle(pattern: .hourMinuteSecond)))")
-                        .font(.title)
-                        .monospaced()
-                        .bold()
-                    
-                }
-                
-            }
+            LostView(gameStats: gameStats)
             
         }
-        
     }
     
     @State private var gameStats = GameStats()
 }
+
 
 struct GameStatsView: View {
     var body: some View {
@@ -82,8 +69,4 @@ struct GameStatsView: View {
     }
     
     let gameStats: GameStats
-}
-
-#Preview {
-    ContentView()
 }
