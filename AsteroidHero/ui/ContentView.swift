@@ -9,11 +9,20 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        
-        GameView()
+    
+        if isPlaying {
+            
+            GameView()
+            
+        }else {
+            
+            MainMenuView(isPlaying: $isPlaying)
+            
+        }
         
     }
     
+    @State private var isPlaying: Bool = false
 }
 
 
