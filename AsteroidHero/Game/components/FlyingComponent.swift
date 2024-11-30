@@ -14,7 +14,7 @@ class FlyingComponent: GKComponent {
     var movementSpeedFactor: CGFloat
     
     var node: SKNode? {
-        self.entity?.component(ofType: ShapeComponent.self)?.shape
+        self.entity?.component(ofType: SpriteComponent.self)?.sprite
     }
     
     init(movementVector: CGVector, movementSpeedFactor: CGFloat, scene: GameScene) {

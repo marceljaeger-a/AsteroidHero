@@ -16,7 +16,7 @@ class WizardComponent: GKComponent, UserInteractivableComponent {
     var magicAttackCount: Int = 1
     
     var node: SKNode? {
-        self.entity?.component(ofType: ShapeComponent.self)?.shape
+        self.entity?.component(ofType: SpriteComponent.self)?.sprite
     }
     
     init(scene: GameScene) {

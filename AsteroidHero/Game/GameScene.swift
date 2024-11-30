@@ -33,9 +33,14 @@ class GameScene: SKScene {
     init(stats: GameStats) {
         self.stats = stats
         
-        super.init(size: .init(width: 256, height: 128))
+        super.init(size: .init(width: 295, height: 140))
         self.scaleMode = .aspectFit
         self.anchorPoint = .zero
+        
+        let backgroundNode = SKShapeNode(rect: self.frame)
+        backgroundNode.lineWidth = 0
+        backgroundNode.fillColor = .black
+        self.addChild(backgroundNode)
         
         _ = EarthEntity(scene: self)
         _ = HeroEntity(scene: self)
@@ -90,7 +95,7 @@ class GameScene: SKScene {
     
     private func cleanUpMagicEntities() {
         for magicEntity in (entities.compactMap { $0 as? MagicEntity }) {
-            if let magicNode = magicEntity.component(ofType: ShapeComponent.self)?.shape {
+            if let magicNode = magicEntity.component(ofType: SpriteComponent.self)?.sprite {
                 if magicNode.frame.intersects(self.frame) == false {
                     magicNode.removeFromParent()
                     self.entities.removeAll { $0 == magicEntity}

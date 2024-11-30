@@ -13,11 +13,11 @@ class HeroEntity: GKEntity {
     init(scene: GameScene) {
         super.init()
         
-        let shape = SKShapeNode(rectOf: .init(width: 16, height: 16))
-        shape.lineWidth = 0
-        shape.fillColor = .blue
-        shape.position = .init(x: 128, y: 24)
-        self.addComponent(ShapeComponent(shape: shape, scene: scene))
+        let texture = SKTexture(image: .hero)
+        texture.filteringMode = .nearest
+        let sprite = SKSpriteNode(texture: texture)
+        sprite.position = .init(x: 147.5, y: 24)
+        self.addComponent(SpriteComponent(sprite: sprite, scene: scene))
         self.addComponent(WizardComponent(scene: scene))
         
         scene.entities.append(self)

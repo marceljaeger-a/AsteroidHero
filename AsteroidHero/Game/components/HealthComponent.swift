@@ -35,9 +35,9 @@ class HealthComponent: GKComponent {
             if isDespawning {
                 
                 scene.entities.removeAll { $0 == entity }
-                if let shapeComponent = self.entity?.component(ofType: ShapeComponent.self) {
+                if let spriteComponent = self.entity?.component(ofType: SpriteComponent.self) {
                     
-                    shapeComponent.shape.removeFromParent()
+                    spriteComponent.sprite.removeFromParent()
                     
                 }
                 

@@ -15,11 +15,11 @@ class AsteoridEntity: GKEntity {
         
         scene.entities.append(self)
         
-        let shape = SKShapeNode(ellipseOf: .init(width: 16, height: 16))
-        shape.fillColor = .red
-        shape.lineWidth = 0
-        shape.position = position
-        self.addComponent(ShapeComponent(shape: shape, scene: scene))
+        let texture = SKTexture(image: .asteorid)
+        texture.filteringMode = .nearest
+        let sprite = SKSpriteNode(texture: texture)
+        sprite.position = position
+        self.addComponent(SpriteComponent(sprite: sprite, scene: scene))
         self.addComponent(FlyingComponent(movementVector: movementVector, movementSpeedFactor: movementSpeedFactor, scene: scene))
         
         self.addComponent(HealthComponent(healthPoints: healthPoints, attackMask: .asteorid, isDespawning: true, scene: scene))

@@ -18,7 +18,7 @@ class AttackComponent: GKComponent {
     var attackCount: Int
     
     var node: SKNode? {
-        self.entity?.component(ofType: ShapeComponent.self)?.shape
+        self.entity?.component(ofType: SpriteComponent.self)?.sprite
     }
     
     init(attackDamage: Int, attackMask: AttackMask, attackCount: Int, scene: GameScene) {
@@ -36,13 +36,13 @@ class AttackComponent: GKComponent {
     
     override func update(deltaTime seconds: TimeInterval) {
         if let node {
-            for entity in (scene.entities.filter { $0.component(ofType: HealthComponent.self) != nil && $0.component(ofType: ShapeComponent.self) != nil }) {
+            for entity in (scene.entities.filter { $0.component(ofType: HealthComponent.self) != nil && $0.component(ofType: SpriteComponent.self) != nil }) {
                 let healthComponent = entity.component(ofType: HealthComponent.self)!
-                let shapeComponent = entity.component(ofType: ShapeComponent.self)!
+                let spriteComponent = entity.component(ofType: SpriteComponent.self)!
                 
                 if healthComponent.attackMask == self.attackMask {
                     
-                    if shapeComponent.shape.intersects(node) {
+                    if spriteComponent.sprite.intersects(node) {
                         
                         attack(healthComponent: healthComponent)
  

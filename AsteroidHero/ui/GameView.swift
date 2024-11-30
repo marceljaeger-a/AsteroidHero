@@ -28,6 +28,7 @@ struct GameView: View {
                     GameStatsView(gameStats: gameStats)
                     
                 }
+                .ignoresSafeArea()
             
         } else {
             

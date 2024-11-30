@@ -13,11 +13,11 @@ class MagicEntity: GKEntity {
     init(startPosition: CGPoint, movementVector: CGVector, movementSpeedFactor: CGFloat, attackDamage: Int, attackCount: Int, scene: GameScene) {
         super.init()
         
-        let shape = SKShapeNode(ellipseOf: .init(width: 8, height: 8))
-        shape.lineWidth = 0
-        shape.fillColor = .orange
-        shape.position = startPosition
-        self.addComponent(ShapeComponent(shape: shape, scene: scene))
+        let texture = SKTexture(image: .magic)
+        texture.filteringMode = .nearest
+        let sprite = SKSpriteNode(texture: texture)
+        sprite.position = startPosition
+        self.addComponent(SpriteComponent(sprite: sprite, scene: scene))
         self.addComponent(FlyingComponent(movementVector: movementVector, movementSpeedFactor: movementSpeedFactor, scene: scene))
         
         self.addComponent(AttackComponent(attackDamage: attackDamage, attackMask: .asteorid, attackCount: attackCount, scene: scene))
