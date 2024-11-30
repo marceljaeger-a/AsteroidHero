@@ -23,12 +23,12 @@ struct GameView: View {
         if gameStats.lost == false {
             
             SpriteView(scene: GameScene(stats: gameStats))
+                .ignoresSafeArea()
                 .overlay {
                     
                     GameStatsView(gameStats: gameStats)
                     
                 }
-                .ignoresSafeArea()
             
         } else {
             
@@ -44,15 +44,18 @@ struct GameView: View {
 struct GameStatsView: View {
     var body: some View {
         VStack {
-            Spacer()
-            HStack {
-                Label("\(gameStats.earthHealthPoints)", systemImage: "heart.fill")
-                    .foregroundStyle(.red)
-                    .font(.title)
-                    .monospaced()
-                    .bold()
+            
+            ZStack {
                 
-                Spacer()
+                HStack {
+                    Label("\(gameStats.earthHealthPoints)", systemImage: "heart.fill")
+                        .foregroundStyle(.red)
+                        .font(.title2)
+                        .monospaced()
+                        .bold()
+                    
+                    Spacer()
+                }
                 
                 if let startDate = gameStats.startDate {
                     Label {
@@ -60,12 +63,16 @@ struct GameStatsView: View {
                     } icon: {
                         Image(systemName: "clock")
                     }
-                    .font(.title)
+                    .labelStyle(.titleOnly)
+                    .font(.title2)
                     .monospaced()
                     .bold()
                 }
+                
             }
-            .padding(8)
+            .padding(10)
+            
+            Spacer()
         }
     }
     
