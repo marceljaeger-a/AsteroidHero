@@ -17,7 +17,7 @@ class AsteroidSpawningComponent: GKComponent {
     var spawningCount: Int = 1
     var asteoridSpeed: CGFloat = 20
     var asteoridMinDistance: Int = 20
-    var asteoridSpawningPadding: Int = 10
+    var asteoridSpawningPadding: Int = 25
     
     private var secondsBuffer: TimeInterval = 0
     
