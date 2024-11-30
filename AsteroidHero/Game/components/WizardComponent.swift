@@ -12,7 +12,7 @@ import SpriteKit
 class WizardComponent: GKComponent, UserInteractivableComponent {
     
     var magicAttackDamage: Int = 1
-    var magicSpeed: CGFloat = 50
+    var magicSpeed: CGFloat = 65
     var magicAttackCount: Int = 1
     
     var node: SKNode? {
