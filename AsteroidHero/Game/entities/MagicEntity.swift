@@ -17,6 +17,14 @@ class MagicEntity: GKEntity {
         texture.filteringMode = .nearest
         let sprite = SKSpriteNode(texture: texture)
         sprite.position = startPosition
+        
+        //Winkel berechnene
+        let dy = movementVector.dy
+        let dx = movementVector.dx
+        let rotation = atan2(dx, dy)
+        
+        sprite.zRotation = ( (.pi / 180) * 180 ) - rotation
+        
         self.addComponent(SpriteComponent(sprite: sprite, scene: scene))
         self.addComponent(FlyingComponent(movementVector: movementVector, movementSpeedFactor: movementSpeedFactor, scene: scene))
         
