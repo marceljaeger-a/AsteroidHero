@@ -12,17 +12,20 @@ struct ContentView: View {
     
         if isPlaying {
             
-            GameView()
+            GameView(isPlaying: $isPlaying)
+                .environment(player)
             
         }else {
             
             MainMenuView(isPlaying: $isPlaying)
+                .environment(player)
             
         }
         
     }
     
     @State private var isPlaying: Bool = false
+    @State private var player: Player = .init()
 }
 
 

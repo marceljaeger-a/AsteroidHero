@@ -31,7 +31,7 @@ struct MainMenuView: View {
                 Spacer()
                 
                 VStack {
-                    Text("Recordtime: \("00:10:00")")
+                    Text("Recordtime: \(Duration.seconds(player.recordTime).formatted())")
                         .font(.title3)
                         .monospaced()
                         .foregroundStyle(.white)
@@ -54,25 +54,20 @@ struct MainMenuView: View {
                 Spacer()
                 
             }
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .overlay(alignment: .topLeading) {
                 
                 //TODO: Design own coins!
-                Label {
-                    Text("100")
-                        .foregroundStyle(.white)
-                } icon: {
-                    Image(systemName: "dollarsign.circle.fill")
-                        .foregroundStyle(.yellow)
-                }
-                .font(.title)
-                .monospaced()
+                EmeraldLabel(emeralds: player.emeralds)
+                    .padding()
                 
             }
-            .padding()
+            
             
         }
     }
     
     @Binding var isPlaying: Bool
+    
+    @Environment(Player.self) var player: Player
 }
