@@ -23,7 +23,7 @@ class AsteoridEntity: GKEntity {
         self.addComponent(FlyingComponent(movementVector: movementVector, movementSpeedFactor: movementSpeedFactor, scene: scene))
         
         self.addComponent(HealthComponent(healthPoints: healthPoints, attackMask: .asteorid, isDespawning: true, scene: scene))
-        self.addComponent(AttackComponent(attackDamage: attackDamage, attackMask: .earth, attackCount: 1, scene: scene))
+        self.addComponent(AttackComponent(attackDamage: attackDamage, attackMask: .earth, attackCount: 1, attackSoundFile: "asteorid_attack.m4a", scene: scene))
     }
     
     required init?(coder: NSCoder) {

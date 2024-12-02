@@ -12,6 +12,7 @@ import SpriteKit
 class AttackComponent: GKComponent {
     
     let scene: GameScene
+    let attackSoundFile: String?
     
     var attackDamage: Int
     var attackMask: AttackMask
@@ -21,10 +22,11 @@ class AttackComponent: GKComponent {
         self.entity?.component(ofType: SpriteComponent.self)?.sprite
     }
     
-    init(attackDamage: Int, attackMask: AttackMask, attackCount: Int, scene: GameScene) {
+    init(attackDamage: Int, attackMask: AttackMask, attackCount: Int, attackSoundFile: String? = "", scene: GameScene) {
         self.attackDamage = attackDamage
         self.attackMask = attackMask
         self.attackCount = attackCount
+        self.attackSoundFile = attackSoundFile
         self.scene = scene
         
         super.init()
@@ -57,9 +59,13 @@ class AttackComponent: GKComponent {
         healthComponent.healthPoints -= attackDamage
         attackCount -= 1
         
+        if let attackSoundFile {
+            self.node?.run(.playSoundFileNamed(attackSoundFile, waitForCompletion: false))
+        }
+        
         if attackCount <= 0 {
             scene.entities.removeAll { $0 == self.entity }
-            self.node?.removeFromParent()
+            self.node?.run(.removeFromParent())
         }
     }
 }

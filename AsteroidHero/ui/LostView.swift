@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import AVKit
 
 struct LostView: View {
     var body: some View {
@@ -60,6 +61,12 @@ struct LostView: View {
             .buttonBorderShape(.capsule)
             .padding()
         }
+        .task {
+            Task {
+                try await Task.sleep(for: .seconds(0.5))
+                audioPlayer?.play()
+            }
+        }
         .onAppear {
             time = gameStats.time
             wonEmeralds = gameStats.wonEmeralds
@@ -78,6 +85,13 @@ struct LostView: View {
     
     @State private var time: TimeInterval? = nil
     @State private var wonEmeralds: Int? = nil
+    private let audioPlayer: AVAudioPlayer? = {
+        if let path = Bundle.main.path(forResource: "gameover.m4a", ofType: nil){
+            let avPlayer = try? AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+            return avPlayer
+        }
+        return nil
+    }()
     
     @Environment(Player.self) var player: Player
 }

@@ -28,7 +28,7 @@ class MagicEntity: GKEntity {
         self.addComponent(SpriteComponent(sprite: sprite, scene: scene))
         self.addComponent(FlyingComponent(movementVector: movementVector, movementSpeedFactor: movementSpeedFactor, scene: scene))
         
-        self.addComponent(AttackComponent(attackDamage: attackDamage, attackMask: .asteorid, attackCount: attackCount, scene: scene))
+        self.addComponent(AttackComponent(attackDamage: attackDamage, attackMask: .asteorid, attackCount: attackCount, attackSoundFile: "magic_attack.m4a", scene: scene))
         
         scene.entities.append(self)
     }

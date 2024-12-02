@@ -55,5 +55,7 @@ class WizardComponent: GKComponent, UserInteractivableComponent {
     
     func createMagic(startPosition: CGPoint, movementVector: CGVector, scene: GameScene) {
         _ = MagicEntity(startPosition: startPosition, movementVector: movementVector, movementSpeedFactor: magicSpeed, attackDamage: magicAttackDamage, attackCount: magicAttackCount, scene: scene)
+        
+        node?.run(.playSoundFileNamed("magic_fire.m4a", waitForCompletion: false))
     }
 }
