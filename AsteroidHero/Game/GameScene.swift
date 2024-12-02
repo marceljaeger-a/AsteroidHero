@@ -20,13 +20,25 @@ class GameScene: SKScene {
             AsteoridSpawningParameterUpdates(spawningRate: .set(value: 5), spawningCount: .set(value: 1), asteoridSpeed: .set(value: 20))
         ]),
         GamePhase(name: "Phase 2", time: 15, updates: [
-            AsteoridSpawningParameterUpdates(spawningRate: .increase(value: -0.5), spawningCount: .increase(value: 1), asteoridSpeed: .multiple(value: 1.10))
+            AsteoridSpawningParameterUpdates(spawningRate: .set(value: 4), spawningCount: .increase(value: 1), asteoridSpeed: .multiple(value: 1.10))
         ]),
         GamePhase(name: "Phase 3", time: 30, updates: [
-            AsteoridSpawningParameterUpdates(spawningRate: .increase(value: -0.5), spawningCount: .increase(value: 1), asteoridSpeed: .multiple(value: 1.10))
+            AsteoridSpawningParameterUpdates(spawningRate: .increase(value: 0), spawningCount: .increase(value: 1), asteoridSpeed: .multiple(value: 1))
         ]),
         GamePhase(name: "Phase 4", time: 45, updates: [
-            AsteoridSpawningParameterUpdates(spawningRate: .increase(value: -0.5), spawningCount: .increase(value: 1), asteoridSpeed: .multiple(value: 1.10))
+            AsteoridSpawningParameterUpdates(spawningRate: .increase(value: 0), spawningCount: .increase(value: 1), asteoridSpeed: .multiple(value: 1))
+        ]),
+        GamePhase(name: "Phase 5", time: 60, updates: [
+            AsteoridSpawningParameterUpdates(spawningRate: .increase(value: 0), spawningCount: .increase(value: 0), asteoridSpeed: .multiple(value: 1.25))
+        ]),
+        GamePhase(name: "Phase 6", time: 80, updates: [
+            AsteoridSpawningParameterUpdates(spawningRate: .increase(value: 0), spawningCount: .increase(value: 1), asteoridSpeed: .multiple(value: 1))
+        ]),
+        GamePhase(name: "Phase 7", time: 100, updates: [
+            AsteoridSpawningParameterUpdates(spawningRate: .set(value: 3), spawningCount: .increase(value: 0), asteoridSpeed: .multiple(value: 1))
+        ]),
+        GamePhase(name: "Phase 8", time: 120, updates: [
+            AsteoridSpawningParameterUpdates(spawningRate: .increase(value: 0), spawningCount: .increase(value: 1), asteoridSpeed: .multiple(value: 1.25))
         ])
     ])
     
