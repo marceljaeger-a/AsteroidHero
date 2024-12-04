@@ -22,7 +22,7 @@ struct MainMenuView: View {
             VStack {
                 Spacer()
                 
-                Text("Asteorid Hero")
+                Text("Asteroid Hero")
                     .font(.largeTitle)
                     .bold()
                     .monospaced()
@@ -31,7 +31,7 @@ struct MainMenuView: View {
                 Spacer()
                 
                 VStack {
-                    Text("Recordtime: \(Duration.seconds(player.recordTime).formatted())")
+                    Text("Your record time is: \(Duration.seconds(player.recordTime).formatted())")
                         .font(.title3)
                         .monospaced()
                         .foregroundStyle(.white)

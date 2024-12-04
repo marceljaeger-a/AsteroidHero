@@ -29,7 +29,7 @@ struct LostView: View {
                 
                 if let startDate = gameStats.startDate, let endDate = gameStats.endDate {
                     
-                    Text("\(Duration.seconds(DateInterval(start: startDate, end: endDate).duration).formatted(Duration.TimeFormatStyle(pattern: .hourMinuteSecond)))")
+                    Text("You held on for: \(Duration.seconds(DateInterval(start: startDate, end: endDate).duration).formatted(Duration.TimeFormatStyle(pattern: .hourMinuteSecond)))")
                         .font(.title2)
                         .monospaced()
                         .bold()
